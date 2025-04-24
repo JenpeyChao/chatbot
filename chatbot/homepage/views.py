@@ -7,7 +7,7 @@ bot_answer = []
 
 def home(request):
     # # Replace with your OpenRouter API key
-    # API_KEY = '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'
+    # API_KEY = ''
     # API_URL = 'https://openrouter.ai/api/v1/chat/completions'
 
     # # Define the headers for the API request
