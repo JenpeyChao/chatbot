@@ -26,17 +26,18 @@
 
     <div class="bottom-box">
         <div class = "ask-box">
-            <form class = "ask-form" method="POST" action="{% url 'get_answer' %}">
+            <form class = "message-form" method="POST" action="{% url 'get_answer' %}">
                 {% csrf_token %}
-                <input type = "text" placeholder="Message Chat Bot" aria-label="Question input" name="text">
-                <button class = "ask-button" type="submit" name="button">Send</button>
+                <input type = "chat-input" placeholder="Message Chat Bot" aria-label="Question input" name="text">
+                <button class = "send-btn" type="submit" name="button">Send</button>
             </form>
             
-            <form method="GET" action="{% url 'clear' %}">
-
-                <button class="clear-button" type="submit" name="clear" style="margin-top: 10px;">
+            <form method="POST" action="{% url 'clear' %}">
+                {% csrf_token %}
+                <button class="clear-btn" type="submit" name="clear" style="margin-top: 10px;">
                 Clear
                 </button>
+            </form>
         </div>
     </div>
     

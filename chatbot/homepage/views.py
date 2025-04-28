@@ -58,6 +58,7 @@ def get_answer(request):
         bot_answer.append("Failed to fetch data from API. Status Code:", response.status_code)
     return redirect(home)
 
+
 def clear(request):
     global user_questions, bot_answer
     current_url = request.build_absolute_uri()
