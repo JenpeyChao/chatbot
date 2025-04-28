@@ -10,17 +10,24 @@ bot_answer = []
 
 def home(request):
     global user_questions, bot_answer
+
     current_url = request.build_absolute_uri()
+
+    prev_url = request.session.get('last_url', '')
+    
+    request.session['last_url'] = current_url
+
     print(current_url)
-    referer_url = request.META.get('HTTP_REFERER', '')
-    print(referer_url)
+    print(prev_url)
+
     print(request.method)
-    if current_url == referer_url:
+    if prev_url == current_url:
         user_questions.clear()
         bot_answer.clear()
     return render(request,'homepage/home.html',{'conversation':zip(user_questions,bot_answer)})
 
 def get_answer(request):
+    request.session['last_url'] = request.build_absolute_uri()
     # Replace with your OpenRouter API key
     print(request.method)
     API_KEY = ''
