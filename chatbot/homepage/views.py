@@ -9,21 +9,6 @@ user_questions = []
 bot_answer = []
 
 def home(request):
-    global user_questions, bot_answer
-
-    current_url = request.build_absolute_uri()
-
-    prev_url = request.session.get('last_url', '')
-    
-    request.session['last_url'] = current_url
-
-    print(current_url)
-    print(prev_url)
-
-    print(request.method)
-    if prev_url == current_url:
-        user_questions.clear()
-        bot_answer.clear()
     return render(request,'homepage/home.html',{'conversation':zip(user_questions,bot_answer)})
 
 def get_answer(request):
@@ -71,4 +56,14 @@ def get_answer(request):
     else:
         print("Failed to fetch data from API. Status Code:", response.status_code)
         bot_answer.append("Failed to fetch data from API. Status Code:", response.status_code)
+    return redirect(home)
+
+def clear(request):
+    global user_questions, bot_answer
+    current_url = request.build_absolute_uri()
+
+    print(current_url)
+
+    user_questions.clear()
+    bot_answer.clear()
     return redirect(home)
