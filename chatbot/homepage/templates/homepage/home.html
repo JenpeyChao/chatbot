@@ -5,13 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/box.css' %}">
-    <title>Home</title>
+    <title>Adam GPT</title>
 </head>
 <body>
     
-    <div  href="{% static 'css/box.css' %}" class = "my-box">
+    <div class = "top-box">
+        <div class="msg-box">
+            {% for user, bot in conversation%}
+            <div class = "user-box">   
+                {{user}}
+            </div>
+
+            <div>
+                {{ bot }}
+            </div>
+            {% endfor %}
+        </div>
         
-        This is a simple box created with a div
     </div>
+
+    <div class="bottom-box">
+        <div class = "ask-box">
+            <form class = "ask-form" method="POST" action="{% url 'get_answer' %}">
+                {% csrf_token %}
+                <input type = "text" placeholder="Message Chat Bot" aria-label="Question input" name="text">
+                <button class = "ask-button" type="submit" name="button">Send</button>
+            </form>
+            
+        </div>
+    </div>
+    
+    
 </body>
 </html>
