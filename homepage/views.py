@@ -15,15 +15,15 @@ def get_answer(request):
     request.session['last_url'] = request.build_absolute_uri()
     # Replace with your OpenRouter API key
     print(request.method)
-    API_KEY = ''
+    API_KEY = os.environ.get('OpenRenderAI')
     question = request.POST.get('text', '')
     user_questions.append(question)
-    try:
-        api_key_path = os.path.join(settings.BASE_DIR, 'homepage', 'apiKey.txt')
-        with open(api_key_path, 'r') as file:  # Path to your .txt file
-            API_KEY = file.read().strip()
-    except FileNotFoundError:
-        raise print("API key file not found!")
+    # try:
+    #     api_key_path = os.path.join(settings.BASE_DIR, 'homepage', 'apiKey.txt')
+    #     with open(api_key_path, 'r') as file:  # Path to your .txt file
+    #         API_KEY = file.read().strip()
+    # except FileNotFoundError:
+    #     raise Exception("API key file not found!")
     
     API_URL = 'https://openrouter.ai/api/v1/chat/completions'
 
@@ -55,7 +55,7 @@ def get_answer(request):
 
     else:
         print("Failed to fetch data from API. Status Code:", response.status_code)
-        bot_answer.append("Failed to fetch data from API. Status Code:", response.status_code)
+        bot_answer.append("Failed to fetch data from API. Status Code: "+ response.status_code)
     return redirect(home)
 
 
