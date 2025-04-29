@@ -123,3 +123,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# settings.py
+CSRF_TRUSTED_ORIGINS = [
+    'https://chatbot-p465.onrender.com',  # Your Render URL
+    # Add other domains if needed (e.g., custom domains)
+]
+
+# Ensure Render's proxy headers are trusted
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
