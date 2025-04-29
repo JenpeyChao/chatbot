@@ -15,9 +15,12 @@ def get_answer(request):
     request.session['last_url'] = request.build_absolute_uri()
     # Replace with your OpenRouter API key
     print(request.method)
-    API_KEY = os.environ.get('OpenRenderAI')
+    API_KEY = os.environ.get('OpenRouterAI')
+    if not API_KEY:
+        raise Exception("API key file not found!")
     question = request.POST.get('text', '')
     user_questions.append(question)
+    print(f"API_KEY being used: {API_KEY}")
     # try:
     #     api_key_path = os.path.join(settings.BASE_DIR, 'homepage', 'apiKey.txt')
     #     with open(api_key_path, 'r') as file:  # Path to your .txt file
