@@ -7,13 +7,13 @@ import requests
 # Create your views here.
 user_questions = []
 bot_answer = []
-
+debug_mode = os.environ.get("DEBUG", "False") == "True"
 def home(request):
     return render(request,'homepage/home.html',{'conversation':zip(user_questions,bot_answer)})
 
 def get_answer(request):
     request.session['last_url'] = request.build_absolute_uri()
-    # Replace with your OpenRouter API key
+    
     print(request.method)
     API_KEY = os.environ.get('OpenRouterAI')
     if not API_KEY:
@@ -54,7 +54,12 @@ def get_answer(request):
         if 'error' in response_data:
             bot_answer.append(response_data['error']['message'])
         else:
-            bot_answer.append(response_data['choices'][0]['message']['content'])
+            text = response_data['choices'][0]['message']['content']
+            text = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', text)
+    
+
+            paragraphs = [f'<p>{p.strip()}</p>' for p in text.split('\n') if p.strip()]
+            bot_answer.append(paragraphs)
 
     else:
         print("Failed to fetch data from API. Status Code:", response.status_code)
