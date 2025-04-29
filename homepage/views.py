@@ -55,7 +55,7 @@ def get_answer(request):
 
     else:
         print("Failed to fetch data from API. Status Code:", response.status_code)
-        bot_answer.append("Failed to fetch data from API. Status Code: "+ response.status_code)
+        bot_answer.append("Failed to fetch data from API. Status Code: "+ str(response.status_code))
     return redirect(home)
 
 
