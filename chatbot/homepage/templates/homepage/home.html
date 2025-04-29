@@ -28,7 +28,7 @@
         <div class = "ask-box">
             <form class = "message-form" method="POST" action="{% url 'get_answer' %}">
                 {% csrf_token %}
-                <input type = "chat-input" placeholder="Message Chat Bot" aria-label="Question input" name="text">
+                <input type = "chat-input" placeholder="Message Adam" aria-label="Question input" name="text">
                 <button class = "send-btn" type="submit" name="button">Send</button>
             </form>
             
