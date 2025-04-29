@@ -2,8 +2,10 @@ import os
 from django.conf import settings
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
-import requests
-
+from django.utils.safestring import mark_safe
+import requests 
+import re
+import markdown
 # Create your views here.
 user_questions = []
 bot_answer = []
@@ -18,9 +20,10 @@ def get_answer(request):
     API_KEY = os.environ.get('OpenRouterAI')
     if not API_KEY:
         raise Exception("API key file not found!")
+    
     question = request.POST.get('text', '')
     user_questions.append(question)
-    print(f"API_KEY being used: {API_KEY}")
+    
     # try:
     #     api_key_path = os.path.join(settings.BASE_DIR, 'homepage', 'apiKey.txt')
     #     with open(api_key_path, 'r') as file:  # Path to your .txt file
@@ -28,6 +31,7 @@ def get_answer(request):
     # except FileNotFoundError:
     #     raise Exception("API key file not found!")
     
+    print(f"API_KEY being used: {API_KEY}")
     API_URL = 'https://openrouter.ai/api/v1/chat/completions'
 
     # Define the headers for the API request
@@ -55,11 +59,8 @@ def get_answer(request):
             bot_answer.append(response_data['error']['message'])
         else:
             text = response_data['choices'][0]['message']['content']
-            text = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', text)
-    
-
-            paragraphs = [f'<p>{p.strip()}</p>' for p in text.split('\n') if p.strip()]
-            bot_answer.append(paragraphs)
+            paragraphs = markdown.markdown(text)
+            bot_answer.append(mark_safe(paragraphs))
 
     else:
         print("Failed to fetch data from API. Status Code:", response.status_code)
