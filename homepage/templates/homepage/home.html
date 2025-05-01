@@ -8,16 +8,23 @@
     <title>Adam GPT</title>
 </head>
 <body>
+    <h3>
+        Chat Created On {{chat.created_at}} UTC
+    </h1>
+    
+    Please save the link to continute chatting: <strong>http://127.0.0.1:8000/{{chat.id}}</strong>
     
     <div class = "top-box">
+        
         <div class="msg-box">
-            {% for user, bot in conversation%}
+            
+            {% for conversation in chat.history%}
             <div class = "user-box">   
-                {{user}}
+                {{conversation.user}}
             </div>
 
             <div>
-                {{ bot |safe}}
+                {{ conversation.bot |safe}}
             </div>
             {% endfor %}
         </div>
@@ -26,13 +33,13 @@
 
     <div class="bottom-box">
         <div class = "ask-box">
-            <form class = "message-form" method="POST" action="{% url 'get_answer' %}">
+            <form class = "message-form" method="POST" action="{% url 'get_answer' chat.id %}">
                 {% csrf_token %}
                 <input type = "chat-input" placeholder="Message Adam" aria-label="Question input" name="text">
                 <button class = "send-btn" type="submit" name="button">Send</button>
             </form>
             
-            <form method="POST" action="{% url 'clear' %}">
+            <form method="POST" action="{% url 'clear' chat.id %}">
                 {% csrf_token %}
                 <button class="clear-btn" type="submit" name="clear" style="margin-top: 10px;">
                 Clear
@@ -40,7 +47,6 @@
             </form>
         </div>
     </div>
-    
-    
+     
 </body>
 </html>
