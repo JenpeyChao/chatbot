@@ -26,24 +26,24 @@ def get_answer(request,chat_id):
     #get the chat from the database
     chat = ChatInstance.objects.get(id=chat_id)
 
-    # history = chat.history
-    # history.append("stuff")
     
+    #prints the method type
     request.session['last_url'] = request.build_absolute_uri()
     print(request.method)
-    API_KEY = '' #os.environ.get('OpenRouterAI')
-    # if not API_KEY:
-    #     raise Exception("API key file not found!")
+
+    API_KEY = os.environ.get('OpenRouterAI')
+    if not API_KEY:
+        raise Exception("API key file not found!")
     
     question = request.POST.get('text', '')
     user_questions.append(question)
     
-    try:
-        api_key_path = os.path.join(settings.BASE_DIR, 'homepage', 'apiKey.txt')
-        with open(api_key_path, 'r') as file:  # Path to your .txt file
-            API_KEY = file.read().strip()
-    except FileNotFoundError:
-        raise Exception("API key file not found!")
+    # try:
+    #     api_key_path = os.path.join(settings.BASE_DIR, 'homepage', 'apiKey.txt')
+    #     with open(api_key_path, 'r') as file:  # Path to your .txt file
+    #         API_KEY = file.read().strip()
+    # except FileNotFoundError:
+    #     raise Exception("API key file not found!")
     
     print(f"API_KEY being used: {API_KEY}")
     API_URL = 'https://openrouter.ai/api/v1/chat/completions'
