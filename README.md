@@ -1,18 +1,18 @@
 # AdamGPT 🤖
-
+https://chatbot-p465.onrender.com<br>
 A lightweight, session-based chatbot inspired by ChatGPT/DeepSeek, built with Django. Each conversation gets a unique, shareable URL without requiring user authentication.
 
 ## Example
 
 - https://chatbot-p465.onrender.com/e7e9d410-736c-4fe8-9582-3970a6e01c3d
-- ![Demo Screenshot](https://via.placeholder.com/800x400?text=AdamGPT+Demo) *(Replace with actual screenshot)*
+- ![Image](https://github.com/user-attachments/assets/f4da4b4d-6913-4423-b3ed-8e3482d0edf5)
 
 ## Features ✨
 
 - **No login required** - Instant chat sessions via unique URLs
 - **Persistent conversations** - Chat history saved across refreshes
 - **Shareable links** - Send your conversation to others
-- **Easy deployment** - Ready for Render/Heroku
+- **New Chat** - Delete the UUID in the URL or just press the link above
 
 ## Tech Stack 🛠️
 
