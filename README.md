@@ -4,7 +4,7 @@ A lightweight, session-based chatbot inspired by ChatGPT/DeepSeek, built with Dj
 
 ## Example
 
-- https://chatbot-p465.onrender.com/e7e9d410-736c-4fe8-9582-3970a6e01c3d
+- https://chatbot-p465.onrender.com/e61cc37f-4c9f-4df4-865a-b64b796061e1
 - ![Image](https://github.com/user-attachments/assets/03c182d2-db28-43ab-8dd3-a0b0b29fe308)
 
 ## Features ✨
